@@ -1,54 +1,62 @@
-// Detecting Button Click
-var btnNode = document.querySelectorAll(".drum");
+// detecting button click
+var btnNode = $(".drum")
 for (let i = 0; i < btnNode.length; i++) {
-    btnNode[i].addEventListener("click", sound);
+    btnNode[i].addEventListener("click", btnOnClick)
 }
 
-function sound() {
-    var btnInnerHTML = this.innerHTML;
-    playSound(btnInnerHTML);
+function btnOnClick() {
+    var btnOnClick = this.textContent;
+    playSound(btnOnClick);
+    btnAnimate(btnOnClick);
+}
+// detecting key press
+document.addEventListener("keydown", keyOnPress);
+
+function keyOnPress(event) {
+    var key = event.key;
+    playSound(key);
+    btnAnimate(key);
 }
 
-
-// Detecting Keyboard Press
-document.addEventListener("keydown", keyBoardChecker);
-
-function keyBoardChecker(a) {
-    playSound(a.key);
+// Add animate
+function btnAnimate(key) {
+    var activeBtn = $("." + key);
+    activeBtn.addClass("pressed");
+    setTimeout(function() {
+        activeBtn.removeClass("pressed");
+    }, 100);
 }
 
-function playSound(key) {
-    switch (key) {
+function playSound(event) {
+    switch (event) {
         case "w":
-            var sound1 = new Audio("sounds/tom-1.mp3");
-            sound1.play();
+            var tom1 = new Audio("sounds/tom-1.mp3");
+            tom1.play();
             break;
         case "a":
-            var sound2 = new Audio("sounds/tom-2.mp3");
-            sound2.play();
+            var tom2 = new Audio("sounds/tom-2.mp3");
+            tom2.play();
             break;
         case "s":
-            var sound3 = new Audio("sounds/tom-3.mp3");
-            sound3.play();
+            var tom3 = new Audio("sounds/tom-3.mp3");
+            tom3.play();
             break;
         case "d":
-            var sound4 = new Audio("sounds/tom-4.mp3");
-            sound4.play();
+            var tom4 = new Audio("sounds/tom-4.mp3");
+            tom4.play();
             break;
         case "j":
-            var sound5 = new Audio("sounds/crash.mp3");
-            sound5.play();
+            var crash = new Audio("sounds/crash.mp3");
+            crash.play();
             break;
         case "k":
-            var sound6 = new Audio("sounds/kick-bass.mp3");
-            sound6.play();
+            var kick_bass = new Audio("sounds/kick-bass.mp3");
+            kick_bass.play();
             break;
         case "l":
-            var sound7 = new Audio("sounds/snare.mp3");
-            sound7.play();
+            var snare = new Audio("sounds/snare.mp3");
+            snare.play();
             break;
         default:
-
     }
-
 }
