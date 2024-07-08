@@ -1,5 +1,5 @@
 // detecting button click
-var btnNode = $(".drum")
+var btnNode = document.querySelectorAll(".drum");
 for (let i = 0; i < btnNode.length; i++) {
     btnNode[i].addEventListener("click", btnOnClick)
 }
@@ -20,13 +20,14 @@ function keyOnPress(event) {
 
 // Add animate
 function btnAnimate(key) {
-    var activeBtn = $("." + key);
-    activeBtn.addClass("pressed");
+    var activeBtn = document.querySelectorAll("." + key);
+    activeBtn.classList.add("pressed");
     setTimeout(function() {
-        activeBtn.removeClass("pressed");
+        activeBtn.classList.remove("pressed");
     }, 100);
 }
 
+// Play Sound
 function playSound(event) {
     switch (event) {
         case "w":
