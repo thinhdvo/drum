@@ -1,63 +1,56 @@
-// detecting button click
-var btnNode = document.querySelectorAll(".drum");
-for (let i = 0; i < btnNode.length; i++) {
-    btnNode[i].addEventListener("click", btnOnClick)
-}
+// detecting click button
 
-function btnOnClick() {
-    var btnOnClick = this.textContent;
-    playSound(btnOnClick);
-    btnAnimate(btnOnClick);
-}
-// detecting key press
-document.addEventListener("keydown", keyOnPress);
-
-function keyOnPress(event) {
-    var key = event.key;
-    playSound(key);
-    btnAnimate(key);
-}
-
-// Add animate
-function btnAnimate(key) {
-    var activeBtn = document.querySelectorAll("." + key);
-    activeBtn.classList.add("pressed");
-    setTimeout(function() {
-        activeBtn.classList.remove("pressed");
+var buttonNode = document.querySelectorAll(".drum");
+for (let i = 0; i < buttonNode.length; i++) {
+    buttonNode[i].addEventListener("click", function() {
+        playSound(this.textContent);
+        animate(this.textContent);
+    });
+};
+// animate
+function animate(key) {
+    var currentKey = document.querySelector("." + key);
+    currentKey.classList.add("pressed");
+    setTimeout(() => {
+        currentKey.classList.remove("pressed");
     }, 100);
 }
-
-// Play Sound
-function playSound(event) {
-    switch (event) {
+// playSound
+function playSound(key) {
+    switch (key) {
         case "w":
-            var tom1 = new Audio("sounds/tom-1.mp3");
-            tom1.play();
+            var w = new Audio("sounds/w.mp3");
+            w.play();
             break;
         case "a":
-            var tom2 = new Audio("sounds/tom-2.mp3");
-            tom2.play();
-            break;
-        case "s":
-            var tom3 = new Audio("sounds/tom-3.mp3");
-            tom3.play();
+            var a = new Audio("sounds/a.mp3");
+            a.play();
             break;
         case "d":
-            var tom4 = new Audio("sounds/tom-4.mp3");
-            tom4.play();
+            var d = new Audio("sounds/d.mp3");
+            d.play();
             break;
         case "j":
-            var crash = new Audio("sounds/crash.mp3");
-            crash.play();
+            var j = new Audio("sounds/j.mp3");
+            j.play();
             break;
         case "k":
-            var kick_bass = new Audio("sounds/kick-bass.mp3");
-            kick_bass.play();
+            var k = new Audio("sounds/k.mp3");
+            k.play();
             break;
         case "l":
-            var snare = new Audio("sounds/snare.mp3");
-            snare.play();
+            var l = new Audio("sounds/l.mp3");
+            l.play();
+            break;
+        case "s":
+            var s = new Audio("sounds/s.mp3");
+            s.play();
             break;
         default:
     }
 }
+// keypress
+document.addEventListener("keydown", function(eve) {
+    playSound(eve.key);
+    animate(eve.key);
+});
